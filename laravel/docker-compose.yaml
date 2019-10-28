@@ -23,7 +23,7 @@ services:
       nginx:
         build: .docker/nginx
         container_name: nginx
-        entrypoint: dockerize -template ./.docker/nginx/template/nginx.tmpl:./.docker/nginx/nginx.conf nginx -g "daemon off;"
+        entrypoint: dockerize -template /var/www/.docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf nginx -g "daemon off;"
         environment:
            - NGINX_HOST=app
            - NGINX_PORT=9000
