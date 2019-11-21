@@ -1,7 +1,7 @@
 steps:
 
 - id: "Rodando docker-compose"
-  name: 'gcr.io/codeeducation-test/docker-compose:1.24.0'
+  name: 'gcr.io/codeeducation-test-259522/docker-compose:1.24.0'
   args: ['-f', 'docker-compose.cloudbuild.yaml', 'up', '-d']
 
 - id: "Rodando docker-ps"
