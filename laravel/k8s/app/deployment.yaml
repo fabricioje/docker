@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: app
+
+spec:
+  selector:
+    matchLabels:
+      app: app
+
+  template:
+    metadata:
+      labels:
+        app: app
+    
+    spec:
+      containers: #Informações do container
+      - name: app
+        image: img-app-deployment #A imagem varia de deploy, ela é dinamica
+        ports:
+        - containerPort: 80
+
+        env: #Configura a variavel de ambiente para o MYSQL
+        - name: DB_PASSWORD #Nome da variavel de ambiente
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password
+
+        envFrom: #Mostra onde vai pegar as variaveis de ambiente
+        - configMapRef: #As variaveis de ambiente vão ser pegas do configMap abaixo
+            name: app-conf
+
+        volumeMounts: #Configuração para montar o volume
+        - name: app-conf
+          mountPath: /var/www/.env
+          subPath: .env #Comando para criar o .env se não existir ou substituir se existir
+
+      volumes:
+      - name: app-conf
+        configMap:
+          name: app-conf #Nome do configMap no arquivo configMap.yaml que vai ser usado para montar o volume 
+          items:
+            - key: env #Nome do arquivo que vai ser criado
+              path: .env #Caminho onde vai ser montado
