@@ -23,8 +23,8 @@ spec:
       volumes:
       - name: nginx-conf #Nome do volume que vai ser montado
         configMap:
-          name: nginx-conf
+          name: nginx-conf #Nome dado no name do arquivo configmap.yaml
           items:
-            - key: nginx.conf
-              path: nginx.conf
+            - key: nginx.conf #Nome da chave dado no data do arquivo configmap.yaml
+              path: nginx.conf #Nome do arquivo que será montado, nesse caso dentro da pasta conf.d
            
