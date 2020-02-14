@@ -16,7 +16,7 @@ spec:
     spec:
       containers: #Informações do container
       - name: app
-        image: img-app-deployment #A imagem varia de deploy, ela é dinamica
+        image: img-app-deployment 
         ports:
         - containerPort: 80
 
