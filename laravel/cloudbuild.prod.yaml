@@ -26,7 +26,7 @@ steps:
 - id: "Building image from Dockerfile.prod"
   name: 'gcr.io/cloud-builders/docker'
   args: ['build','-t','gcr.io/$PROJECT_ID/app-laravel:$SHORT_SHA','-f','Dockerfile.prod','.'] # O $SHORT_SHA é para gerar um nome de imagem diferente para cada imagem baseado no commit  
-#teste commit novo dfgdsf fdsaf fdsfsadfa fdsafsda teste dfsad fdsfadfa fsdfasd fsdafasfdafsa fsdafas fsaf fsdafsd oiufoisuafsaoifusaofua tsteste fdsafasd teste fdsfasdf
+#teste commit novo dfgdsf fdsaf fdsfsadfa fsdafsa fdsafsda teste dfsad fdsfadfa fsdfasd fsdafasfdafsa fsdafas fsaf fsdafsd oiufoisuafsaoifusaofua tsteste fdsafasd teste fdsfasdf
 - id: "Pushing image"  
   name: 'gcr.io/cloud-builders/docker'
   args: ['push','gcr.io/$PROJECT_ID/app-laravel:$SHORT_SHA']
