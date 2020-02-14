@@ -41,5 +41,5 @@ spec:
         configMap:
           name: app-conf #Nome do configMap no arquivo configMap.yaml que vai ser usado para montar o volume 
           items:
-            - key: .env #Nome do arquivo que vai ser criado
+            - key: .env #Nome do arquivo que vai ser criado teste
               path: .env #Caminho onde vai ser montado
