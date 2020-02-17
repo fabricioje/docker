@@ -29,7 +29,7 @@ steps:
 #teste commit novo dfgdsf fdsaf fdsfsadfa fsdafsa sdfsafda fdsafsda fdsafdsa teste dfsad fdsfadfa fsdfasd fsdafasfdafsa fsdafas fsaf fsdafsd oiufoisuafsaoifusaofua tsteste fdsafasd teste fdsfasdf
 - id: "Pushing image"  
   name: 'gcr.io/cloud-builders/docker'
-  args: ['push','gcr.io/$PROJECT_ID/app-laravel:$SHORT_SHA']
+  args: ['push','gcr.io/$PROJECT_ID/laravel/app-laravel:$SHORT_SHA']
 
 
 
