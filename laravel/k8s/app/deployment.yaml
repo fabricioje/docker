@@ -17,6 +17,7 @@ spec:
       containers: #Informações do container
       - name: app
         image: img-app-deployment 
+        command: ["/bin/sh","-c","ln -s /var/www /usr/share/nginx; /var/www/k8s/entrypoint.sh; php-fpm;"] # Comando para criar uma ligação (atalho ou link simbólico como é mais conhecido) entre /var/www /usr/share/nginx
         ports:
         - containerPort: 80
 
