@@ -8,6 +8,7 @@ RUN rm -rf /var/www/html
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# COPY . /var/www #Geralmente é usado assim, copiando a raiz toda, mas como o meu projeto tem subpastas, eu tive que colocar para copiar somente a pasta laravel
 COPY /laravel /var/www
 RUN composer install && \
             php artisan config:cache && \
