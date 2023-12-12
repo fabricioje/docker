@@ -1,26 +1,17 @@
-FROM php:7.3.6-fpm-alpine3.9
-RUN apk add --no-cache openssl bash mysql-client nodejs npm
-RUN docker-php-ext-install pdo pdo_mysql
+FROM php:7.4-cli
 
-ENV DOCKERIZE_VERSION v0.6.1
-RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 WORKDIR /var/www
-RUN rm -rf /var/www/html
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apt-get update && \
+    apt-get install libzip-dev -y&& \
+    docker-php-ext-install zip
 
-#RUN composer install 
-#   && \
-#   cp .env.example .env && \
-#   php artisan key:generate && \
-#   php artisan config:cache
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');"
 
-COPY . /var/www
+RUN php composer.phar create-project --prefer-dist laravel/laravel laravel
 
-RUN ln -s public html
-
-EXPOSE 9000
-ENTRYPOINT ["php-fpm"]
-
+ENTRYPOINT [ "php","laravel/artisan", "serve" ]
+CMD [ "--host=0.0.0.0" ]
