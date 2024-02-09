@@ -2,6 +2,7 @@ version: '3'
 
 services:
   db:
+    platform: linux/x86_64 # FOI NECESSÁRIO COLOCAR PARA RODAR NO MAC COM M1
     image: mysql:5.7
     command: --innodb-use-native-aio=0
     container_name: db
