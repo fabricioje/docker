@@ -1,3 +1,3 @@
 Link para o Docker Hub
 
-https://cloud.docker.com/u/fabricioje/repository/docker/fabricioje/codeeducation
+https://hub.docker.com/repository/docker/fabricioje/fullcycle/general
